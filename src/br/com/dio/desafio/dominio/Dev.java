@@ -2,7 +2,7 @@ package br.com.dio.desafio.dominio;
 
 import java.util.*;
 
-public class Dev {
+public class Dev{
     private String nome;
     private Set<Conteudo> conteudosInscritos = new LinkedHashSet<>();
     private Set<Conteudo> conteudosConcluidos = new LinkedHashSet<>();
@@ -20,6 +20,17 @@ public class Dev {
         } else {
             System.err.println("Você não está matriculado em nenhum conteúdo!");
         }
+    }
+
+    public static void rank(List<Dev> devs) {
+        devs.sort(Comparator.comparingDouble(Dev::calcularTotalXp).reversed());
+        System.out.println("-----------------");
+        System.out.println("Ranking dos Devs:");
+        for (int i = 0; i < devs.size(); i++) {
+            Dev dev = devs.get(i);
+            System.out.println((i + 1) + ". " + dev.getNome() + " - XP: " + dev.calcularTotalXp());
+        }
+        System.out.println("-----------------");
     }
 
     public double calcularTotalXp() {
